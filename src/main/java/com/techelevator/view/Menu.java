@@ -15,6 +15,10 @@ public class Menu {
 		this.in = new Scanner(input);
 	}
 
+	public Menu() {
+
+	}
+
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
@@ -51,7 +55,4 @@ public class Menu {
 		out.flush();
 	}
 
-	public void displayVendingMachineItems(){
-
-	}
 }

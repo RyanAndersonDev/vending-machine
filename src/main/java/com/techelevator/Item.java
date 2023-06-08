@@ -16,7 +16,7 @@ public class Item {
     private BigDecimal price;
     private String type;
     private int stock;
-    private final File STOCK_FILE = new File("vendingmachine.csv");
+    private static final File STOCK_FILE = new File("vendingmachine.csv");
 
     public Item(String id, String name, BigDecimal price, String type) {
         this.id = id;
@@ -51,12 +51,12 @@ public class Item {
 
 
     //method
-    public void createItemsFromFolder(){
+    public static void createItemsFromFolder(){
         try(Scanner fileInput = new Scanner(STOCK_FILE);){
             //loop
             while(fileInput.hasNextLine()){
                 String fileLine = fileInput.nextLine();
-                String[] fileLineElements = fileLine.split("|");
+                String[] fileLineElements = fileLine.split("\\|");
 
                 String id = fileLineElements[0];
                 String name = fileLineElements[1];

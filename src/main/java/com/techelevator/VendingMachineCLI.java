@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.view.Menu;
+import com.techelevator.view.PurchaseMenu;
 
 public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
@@ -25,13 +26,30 @@ public class VendingMachineCLI {
 	public void run() {
 		while (true) {
 			//restocking vending machine restock(invFile)
-
+			Item.createItemsFromFolder();
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
+				System.out.println(VendingMachineInventory.INSTANCE);
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+				PurchaseMenu purchaseMenuInstance = new PurchaseMenu(System.in, System.out);
+
+				while(true) {
+					System.out.println("\nCurrent Money Provided: $" + purchaseMenuInstance.getMoneyProvided());
+
+					choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
+					if(choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+						purchaseMenuInstance.feedMoney();
+					} else if(choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+
+					} else if(choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+
+					}
+				}
+
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				//Exit
 			}
