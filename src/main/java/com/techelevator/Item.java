@@ -23,7 +23,7 @@ public class Item {
         this.name = name;
         this.price = price;
         this.type = type;
-        this.stock = 5;
+        this.stock = 0;
     }
 //getters
     public String getId() {
@@ -52,7 +52,7 @@ public class Item {
 
     //method
     public static void createItemsFromFolder(){
-        try(Scanner fileInput = new Scanner(STOCK_FILE);){
+        try(Scanner fileInput = new Scanner(STOCK_FILE)){
             //loop
             while(fileInput.hasNextLine()){
                 String fileLine = fileInput.nextLine();
