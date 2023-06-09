@@ -20,12 +20,12 @@ public class VendingMachineInventory {
         String output = "";
         for(Item item : inventoryMap.values()) {
 
-            output += "[" + item.getId() + "] " + item.getName() + ": $" + item.getPrice();
-                if (item.getStock() > 0){
-                    output += "\n(Quantity: " + item.getStock() + ")\n\n";
-                } else {
-                    output += "\nOut of stock.\n\n";
-                }
+            output += "[" + item.getId() + "] " + item.getName() + ": $" + item.getPrice() + "\n";
+            if (item.getStock() > 0){
+                output += "(Quantity: " + item.getStock() + ")\n\n";
+            } else {
+                output += "Out of stock.\n\n";
+            }
         }
         return output;
     }
