@@ -2,10 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Item {
@@ -23,7 +20,7 @@ public class Item {
         this.name = name;
         this.price = price;
         this.type = type;
-        this.stock = 0;
+        this.stock = 5;
     }
 //getters
     public String getId() {
