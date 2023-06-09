@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class Item {
 
     private String id;
-
     private String name;
     private BigDecimal price;
     private String type;
     private int stock;
+    private String typeMessage;
     private static final File STOCK_FILE = new File("vendingmachine.csv");
 
     public Item(String id, String name, BigDecimal price, String type) {
@@ -21,6 +21,7 @@ public class Item {
         this.price = price;
         this.type = type;
         this.stock = 5;
+        setTypeMessage();
     }
 //getters
     public String getId() {
@@ -39,19 +40,35 @@ public class Item {
         return type;
     }
 
-    public int getStock(){
+    public int getStock() {
         return stock;
     }
 
+    public String getTypeMessage(){
+        return typeMessage;
+    }
 
 //setter
+    public void setTypeMessage() {
+        if (type.equals("Chip")) {
+            typeMessage = "Crunch Crunch, Yum!";
+        } else if (type.equals("Candy")) {
+            typeMessage = "Munch Munch, Yum!";
+        } else if (type.equals("Drink")) {
+            typeMessage = "Glug Glug, Yum!";
+        } else if (type.equals("Gum")) {
+            typeMessage = "Chew Chew, Yum!";
+        }
+    }
 
 
-    //method
-    public static void createItemsFromFolder(){
-        try(Scanner fileInput = new Scanner(STOCK_FILE)){
+
+
+//method
+    public static void createItemsFromFolder() {
+        try(Scanner fileInput = new Scanner(STOCK_FILE)) {
             //loop
-            while(fileInput.hasNextLine()){
+            while(fileInput.hasNextLine()) {
                 String fileLine = fileInput.nextLine();
                 String[] fileLineElements = fileLine.split("\\|");
 
@@ -64,8 +81,12 @@ public class Item {
 
                 VendingMachineInventory.INSTANCE.getInventoryMap().put(id, item);
             }
-        } catch (FileNotFoundException fileNotFoundException){
+        } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("File not found");
         }
+    }
+
+    public void decrementStock(){
+        this.stock--;
     }
 }

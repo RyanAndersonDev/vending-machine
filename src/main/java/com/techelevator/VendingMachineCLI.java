@@ -46,7 +46,7 @@ public class VendingMachineCLI {
 						purchaseMenuInstance.feedMoney();
 					} else if(choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 						//select product
-
+						purchaseMenuInstance.selectProduct();
 					} else if(choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						//finish transaction
 
