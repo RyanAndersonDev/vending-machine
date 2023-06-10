@@ -19,7 +19,7 @@ public class Log {
     private BigDecimal transactionAmount;
     private BigDecimal currentBalance;
     private static Map<String, Integer> salesReport = new HashMap<>();
-    private static String salesFileDateTimePrefix = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "_";
+    private static String salesFileDateTimePrefix = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss")) + "_";
     private static final String SALES_REPORT_FILE_PATH =  salesFileDateTimePrefix + "Sales_Report.txt";
 
     private static File SALES_REPORT_FILE = new File(SALES_REPORT_FILE_PATH);
