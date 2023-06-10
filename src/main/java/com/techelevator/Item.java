@@ -15,6 +15,8 @@ public class Item {
     private String typeMessage;
     private static final File STOCK_FILE = new File("vendingmachine.csv");
 
+
+    // Constructor
     public Item(String id, String name, BigDecimal price, String type) {
         this.id = id;
         this.name = name;
@@ -23,7 +25,9 @@ public class Item {
         this.stock = 5;
         setTypeMessage();
     }
-//getters
+
+
+    // Getters
     public String getId() {
         return id;
     }
@@ -48,7 +52,8 @@ public class Item {
         return typeMessage;
     }
 
-//setter
+
+    // Setter
     public void setTypeMessage() {
         if (type.equals("Chip")) {
             typeMessage = "Crunch Crunch, Yum!";
@@ -62,9 +67,7 @@ public class Item {
     }
 
 
-
-
-//method
+    // Method
     public static void createItemsFromFolder() {
         try(Scanner fileInput = new Scanner(STOCK_FILE)) {
             while(fileInput.hasNextLine()) {
