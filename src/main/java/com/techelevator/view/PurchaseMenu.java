@@ -71,8 +71,8 @@ public class PurchaseMenu extends Menu {
                     moneyProvided = moneyProvided.subtract(selectedItem.getPrice());
                     System.out.println("\n" + selectedItem.getTypeMessage() + "\nDispensed " + selectedItem.getName() +
                             " ($" + selectedItem.getPrice() + ")\nRemaining Balance: " + moneyProvided);
-
                     // log purchase
+                    Log.addSaleToReport(selectedItem.getName());
                     Log transactionLog = new Log(selectedItem.getName() + " " + selectedItem.getId(),
                             selectedItem.getPrice(), moneyProvided);
                     transactionLog.writeLog();
