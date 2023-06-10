@@ -45,7 +45,7 @@ public class PurchaseMenu extends Menu {
 
                 BigDecimal userInput = new BigDecimal(scanner.next());
                 moneyProvided = moneyProvided.add(userInput);
-                Log changeLog = new Log("FEED MONEY: ", userInput, userInput);
+                Log changeLog = new Log("FEED MONEY:", userInput, userInput);
                 changeLog.writeLog();
 
                 isUserInputValid = true;
@@ -81,7 +81,7 @@ public class PurchaseMenu extends Menu {
                     System.out.println("\nItem out of stock.");
                 }
             } else {
-                System.out.println("Invalid funds. Please feed more money.");
+                System.out.println("\nInvalid funds. Please feed more money to make purchase.");
             }
         } else {
             System.out.println("\nInvalid Slot ID.");
@@ -92,7 +92,7 @@ public class PurchaseMenu extends Menu {
         String change = getChange(moneyProvided);
         BigDecimal returnAmount = moneyProvided;
         moneyProvided = moneyProvided.subtract(moneyProvided);
-        Log finalizedLog = new Log("GIVE CHANGE: ", returnAmount, new BigDecimal("0.00"));
+        Log finalizedLog = new Log("GIVE CHANGE:", returnAmount, new BigDecimal("0.00"));
         finalizedLog.writeLog();
         return change;
     }
