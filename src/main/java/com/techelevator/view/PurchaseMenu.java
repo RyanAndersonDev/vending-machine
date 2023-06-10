@@ -39,18 +39,19 @@ public class PurchaseMenu extends Menu {
         Scanner scanner = new Scanner(System.in);
         boolean isUserInputValid = false;
 
-        while(!isUserInputValid)
-        try {
-            System.out.print("\nPlease enter a dollar amount.\n$");
+        while(!isUserInputValid) {
+            try {
+                System.out.print("\nPlease enter a dollar amount.\n$");
 
-            BigDecimal userInput = new BigDecimal(scanner.next());
-            moneyProvided = moneyProvided.add(userInput);
-            Log changeLog = new Log("FEED MONEY: ", userInput, userInput);
-            changeLog.writeLog();
+                BigDecimal userInput = new BigDecimal(scanner.next());
+                moneyProvided = moneyProvided.add(userInput);
+                Log changeLog = new Log("FEED MONEY: ", userInput, userInput);
+                changeLog.writeLog();
 
-            isUserInputValid = true;
-        } catch (NumberFormatException | FileNotFoundException e) {
-            System.out.println("Number not valid.\n");
+                isUserInputValid = true;
+            } catch (NumberFormatException | FileNotFoundException e) {
+                System.out.println("Number not valid.\n");
+            }
         }
     }
 
@@ -108,12 +109,12 @@ public class PurchaseMenu extends Menu {
         for(BigDecimal value : coinValues) {
             if(moneyRemaining.compareTo(value) >= 0) {
 
-                BigDecimal coinCointer = (moneyRemaining.divide(value));
-                coinCointer = coinCointer.setScale(0, RoundingMode.DOWN);
+                BigDecimal coinCounter = (moneyRemaining.divide(value));
+                coinCounter = coinCounter.setScale(0, RoundingMode.DOWN);
 
-                changeMap.put(value, coinCointer);
+                changeMap.put(value, coinCounter);
 
-                BigDecimal amountToSubtract = coinCointer.multiply(value);
+                BigDecimal amountToSubtract = coinCounter.multiply(value);
                 moneyRemaining = moneyRemaining.subtract(amountToSubtract);
             }
         }

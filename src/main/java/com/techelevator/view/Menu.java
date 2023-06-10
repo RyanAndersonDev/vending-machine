@@ -21,6 +21,7 @@ public class Menu {
 
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
+
 		while (choice == null) {
 			displayMenuOptions(options);
 			choice = getChoiceFromUserInput(options);
@@ -31,6 +32,7 @@ public class Menu {
 	private Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
+
 		try {
 			int selectedOption = Integer.valueOf(userInput);
 			if (selectedOption > 0 && selectedOption <= options.length) {
@@ -47,10 +49,12 @@ public class Menu {
 
 	private void displayMenuOptions(Object[] options) {
 		out.println();
+
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;
 			out.println(optionNum + ") " + options[i]);
 		}
+
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
 	}

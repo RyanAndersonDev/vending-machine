@@ -67,7 +67,6 @@ public class Item {
 //method
     public static void createItemsFromFolder() {
         try(Scanner fileInput = new Scanner(STOCK_FILE)) {
-            //loop
             while(fileInput.hasNextLine()) {
                 String fileLine = fileInput.nextLine();
                 String[] fileLineElements = fileLine.split("\\|");

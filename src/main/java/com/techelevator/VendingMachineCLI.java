@@ -26,16 +26,14 @@ public class VendingMachineCLI {
 	}
 
 	public void run() throws FileNotFoundException {
+		Item.createItemsFromFolder();
 		while (true) {
-			//restocking vending machine restock(invFile)
-			Item.createItemsFromFolder();
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
 				System.out.println(VendingMachineInventory.INSTANCE);
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
 				PurchaseMenu purchaseMenuInstance = new PurchaseMenu(System.in, System.out);
 
 				while(true) {
@@ -44,13 +42,12 @@ public class VendingMachineCLI {
 					choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
 					if(choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-						//feed money
 						purchaseMenuInstance.feedMoney();
+
 					} else if(choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						//select product
 						purchaseMenuInstance.selectProduct();
+
 					} else if(choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-						//finish transaction
 						String changeString = purchaseMenuInstance.finalizeTransaction();
 						System.out.println(changeString);
 						break;
@@ -58,8 +55,8 @@ public class VendingMachineCLI {
 				}
 
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				//Exit
 				break;
+
 			}
 		}
 	}
