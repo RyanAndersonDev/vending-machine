@@ -9,7 +9,7 @@ public class VendingMachineInventory {
     private final Map<String, Item> inventoryMap = new HashMap<>();
     public static VendingMachineInventory INSTANCE = new VendingMachineInventory();
 
-    private VendingMachineInventory(){}
+    private VendingMachineInventory() {}
 
     public Map<String, Item> getInventoryMap() {
         return inventoryMap;

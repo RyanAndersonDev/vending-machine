@@ -33,10 +33,10 @@ public class VendingMachineCLI {
 	public void run() throws IOException {
 		Item.createItemsFromFolder();
 		Log.populateSalesReport(true);
-		while (true) {
+		while(true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
-			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+			if(choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				System.out.println(VendingMachineInventory.INSTANCE);
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
@@ -60,9 +60,9 @@ public class VendingMachineCLI {
 					}
 				}
 
-			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+			} else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				break;
-			} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
+			} else if(choice.equals(MAIN_MENU_SECRET_OPTION)) {
 				Log.populateSalesReport(false);
 				System.out.println("\nSales report generated (accessible after Exit)");
 			}

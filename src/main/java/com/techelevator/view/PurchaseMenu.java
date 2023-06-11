@@ -64,27 +64,22 @@ public class PurchaseMenu extends Menu {
         String userIdInput = scanner.nextLine();
         Item selectedItem = inventoryMap.get(userIdInput);
 
-        if (inventoryMap.containsKey(userIdInput)) {
-            if(moneyProvided.compareTo(selectedItem.getPrice()) >= 0) {
-                if (selectedItem.getStock() > 0) {
-                    selectedItem.decrementStock();
-                    moneyProvided = moneyProvided.subtract(selectedItem.getPrice());
-                    System.out.println("\n" + selectedItem.getTypeMessage() + "\nDispensed " + selectedItem.getName() +
-                            " ($" + selectedItem.getPrice() + ")\nRemaining Balance: " + moneyProvided);
-                    // log purchase
-                    Log.addSaleToReport(selectedItem.getName());
-                    Log transactionLog = new Log(selectedItem.getName() + " " + selectedItem.getId(),
-                            selectedItem.getPrice(), moneyProvided);
-                    transactionLog.writeLog();
-
-                } else {
-                    System.out.println("\nItem out of stock.");
-                }
-            } else {
-                System.out.println("\nInvalid funds. Please feed more money to make purchase.");
-            }
-        } else {
+        if(!inventoryMap.containsKey(userIdInput)) {
             System.out.println("\nInvalid Slot ID.");
+        } else if(moneyProvided.compareTo(selectedItem.getPrice()) < 0) {
+            System.out.println("\nInvalid funds. Please feed more money to make purchase.");
+        } else if(selectedItem.getStock() <= 0) {
+            System.out.println("\nItem out of stock.");
+        } else {
+            selectedItem.decrementStock();
+            moneyProvided = moneyProvided.subtract(selectedItem.getPrice());
+            System.out.println("\n" + selectedItem.getTypeMessage() + "\nDispensed " + selectedItem.getName() +
+                    " ($" + selectedItem.getPrice() + ")\nRemaining Balance: " + moneyProvided);
+
+            Log.addSaleToReport(selectedItem.getName());
+            Log transactionLog = new Log(selectedItem.getName() + " " + selectedItem.getId(),
+                    selectedItem.getPrice(), moneyProvided);
+            transactionLog.writeLog();
         }
     }
 

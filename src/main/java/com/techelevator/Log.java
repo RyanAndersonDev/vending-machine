@@ -21,7 +21,7 @@ public class Log {
     private BigDecimal transactionAmount;
     private BigDecimal currentBalance;
     private static Map<String, Integer> salesReport = new HashMap<>();
-    private static String salesFileDateTimePrefix = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss")) + "_";
+    private static String salesFileDateTimePrefix = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH;mm;ss")) + "_";
     private static final String SALES_REPORT_FILE_PATH =  salesFileDateTimePrefix + "Sales_Report.txt";
 
     private static File SALES_REPORT_FILE = new File(SALES_REPORT_FILE_PATH);
@@ -60,7 +60,7 @@ public class Log {
     public boolean writeLog() throws FileNotFoundException {
         if(validateFile(stockFile)) {
             validateFile(stockFile);
-            String loggedString = currentDate.toString() + " " + currentTime.toString() + " " + transactionType + " $"
+            String loggedString = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " " + transactionType + " $"
                     + transactionAmount + " $" + currentBalance;
 
             try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(stockFile, true))){
@@ -94,16 +94,18 @@ public class Log {
         salesLog.validateFile(SALES_REPORT_FILE);
         try(PrintWriter printWriter = new PrintWriter(SALES_REPORT_FILE);) {
 
-            for (Item item : INSTANCE.getInventoryMap().values()){
+            for(Item item : INSTANCE.getInventoryMap().values()){
                 if(isInitializing) {
                     salesReport.put(item.getName(), 0);
                 }
                 String salesReportLine = item.getName() + "|" + salesReport.get(item.getName());
                 printWriter.println(salesReportLine);
             }
+
             BigDecimal salesReportTotal = calculateSalesReportTotal(salesReport, INSTANCE.getInventoryMap());
             printWriter.println("\n\n**TOTAL SALES** $" + salesReportTotal);
-        } catch (IOException ioException) {
+
+        } catch(IOException ioException) {
             System.out.println("IO Error");
         }
         return (salesReport.get("Potato Crisps") >= 0);
