@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.techelevator.VendingMachineInventory.INSTANCE;
+
 public class Log {
 
     private static final String STOCK_FILE_PATH = "Log.txt";
@@ -90,21 +92,40 @@ public class Log {
     public static boolean populateSalesReport(boolean isInitializing) throws IOException {
         Log salesLog = new Log();
         salesLog.validateFile(SALES_REPORT_FILE);
-        try(PrintWriter printWriter = new PrintWriter(SALES_REPORT_FILE);){
-            for (Item item : VendingMachineInventory.INSTANCE.getInventoryMap().values()){
+        try(PrintWriter printWriter = new PrintWriter(SALES_REPORT_FILE);) {
+
+            for (Item item : INSTANCE.getInventoryMap().values()){
                 if(isInitializing) {
                     salesReport.put(item.getName(), 0);
                 }
                 String salesReportLine = item.getName() + "|" + salesReport.get(item.getName());
                 printWriter.println(salesReportLine);
             }
-           // printWriter.println("\n\n***TOTAL SALES** " + placeHolderTotal); //need total variable
-        } catch (IOException ioException){
+            BigDecimal salesReportTotal = calculateSalesReportTotal(salesReport, INSTANCE.getInventoryMap());
+            printWriter.println("\n\n**TOTAL SALES** $" + salesReportTotal);
+        } catch (IOException ioException) {
             System.out.println("IO Error");
         }
         return (salesReport.get("Potato Crisps") >= 0);
     }
 
+    private static BigDecimal calculateSalesReportTotal(Map<String, Integer> salesReport, Map<String, Item> inventoryMap) {
+        BigDecimal total = new BigDecimal("0.00");
 
+        for(Map.Entry<String, Item> entry : inventoryMap.entrySet()) {
+            Item item = entry.getValue();
+            String itemName = item.getName();
+            BigDecimal itemPrice = item.getPrice();
+
+            if(salesReport.containsKey(itemName)) {
+                int quantity = salesReport.get(itemName);
+                BigDecimal price = new BigDecimal(String.valueOf(itemPrice));
+
+                BigDecimal amountToAdd = new BigDecimal(String.valueOf(price.multiply(BigDecimal.valueOf(quantity))));
+                total = total.add(amountToAdd);
+            }
+        }
+        return total;
+    }
 
 }

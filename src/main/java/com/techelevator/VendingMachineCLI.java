@@ -64,6 +64,7 @@ public class VendingMachineCLI {
 				break;
 			} else if (choice.equals(MAIN_MENU_SECRET_OPTION)) {
 				Log.populateSalesReport(false);
+				System.out.println("\nSales report generated (accessible after Exit)");
 			}
 		}
 	}

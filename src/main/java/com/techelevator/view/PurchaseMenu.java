@@ -45,7 +45,7 @@ public class PurchaseMenu extends Menu {
 
                 BigDecimal userInput = new BigDecimal(scanner.next());
                 moneyProvided = moneyProvided.add(userInput);
-                Log changeLog = new Log("FEED MONEY:", userInput, userInput);
+                Log changeLog = new Log("FEED MONEY:", userInput, moneyProvided);
                 changeLog.writeLog();
 
                 isUserInputValid = true;
