@@ -107,7 +107,6 @@ public class Log {
 
         } catch(IOException ioException) {
             System.out.println("IO Error");
-            ioException.printStackTrace();
         }
         return (salesReport.get("Potato Crisps") >= 0);
     }
